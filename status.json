@@ -1,0 +1,8 @@
+{
+  "generated_at": null,
+  "checks": [
+    { "key": "remuneracao", "url": "https://tinyurl.com/remuneracaosefazrn", "status": "unknown", "http_code": 0 },
+    { "key": "sei", "url": "https://tinyurl.com/seisefazrn", "status": "unknown", "http_code": 0 },
+    { "key": "lotacao", "url": "https://tinyurl.com/lotacaosefazrn", "status": "unknown", "http_code": 0 }
+  ]
+}

@@ -311,6 +311,68 @@
 
   .card.c3 .num{ color: #7f5aa8; }
 
+  /* ---------- status indicator ---------- */
+  .status{
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 9px 4px 7px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+    color: var(--ink-soft);
+  }
+  .status .dot{
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .status[data-state="up"]{
+    color: #1b6b45;
+    border-color: rgba(46,125,91,0.35);
+    background: rgba(46,125,91,0.08);
+  }
+  .status[data-state="up"] .dot{
+    background: var(--forest);
+    box-shadow: 0 0 0 3px rgba(46,125,91,0.18);
+  }
+  .status[data-state="down"]{
+    color: #a3312a;
+    border-color: rgba(163,49,42,0.3);
+    background: rgba(163,49,42,0.07);
+  }
+  .status[data-state="down"] .dot{
+    background: #c23b32;
+    box-shadow: 0 0 0 3px rgba(194,59,50,0.16);
+  }
+  .status[data-state="checking"] .dot,
+  .status[data-state="unknown"] .dot{
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: .35; }
+  }
+
+  .card-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .status-note{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
   /* ---------- Footer note ---------- */
   .note{
     margin-top: 46px;
@@ -358,7 +420,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    *{ transition: none !important; scroll-behavior: auto !important; }
+    *{ transition: none !important; scroll-behavior: auto !important; animation: none !important; }
   }
 </style>
 </head>
@@ -367,7 +429,7 @@
   <div class="ribbon">
     <div class="wrap">
       <span>Governo do Estado do Rio Grande do Norte</span>
-      <span>Secretaria da Fazenda · Sefaz/RN</span>
+      <span>Secretaria de Estado da Tributação · Sefaz/RN</span>
     </div>
   </div>
 
@@ -397,13 +459,16 @@
 
       <div class="section-head">
         <h2>Ferramentas disponíveis</h2>
-        <span>3 de 3 no ar</span>
+        <span id="live-count">verificando…</span>
       </div>
 
       <div class="cards">
 
         <a class="card c1" href="https://tinyurl.com/remuneracaosefazrn" target="_blank" rel="noopener">
-          <span class="num">Remuneração</span>
+          <div class="card-top">
+            <span class="num">Remuneração</span>
+            <span class="status" data-status-key="remuneracao" data-state="unknown"><span class="dot"></span><span class="label">checando</span></span>
+          </div>
           <h3>Simulador de remuneração</h3>
           <p>Estime subsídio, vantagens e descontos conforme cargo, classe e tempo de carreira na Sefaz/RN.</p>
           <span class="go">
@@ -413,9 +478,13 @@
         </a>
 
         <a class="card c2" href="https://tinyurl.com/seisefazrn" target="_blank" rel="noopener">
-          <span class="num">Provimento · SEI</span>
+          <div class="card-top">
+            <span class="num">Provimento · SEI</span>
+            <span class="status" data-status-key="sei" data-state="unknown"><span class="dot"></span><span class="label">checando</span></span>
+          </div>
           <h3>Controle de processos no SEI</h3>
           <p>Acompanhe o andamento dos processos de provimento tramitando no Sistema Eletrônico de Informações.</p>
+          <p class="status-note">Depende do notebook do mantenedor estar ligado e conectado.</p>
           <span class="go">
             <span class="url">tinyurl.com/seisefazrn</span>
             <span class="arrow" aria-hidden="true">↗</span>
@@ -423,7 +492,10 @@
         </a>
 
         <a class="card c3" href="https://tinyurl.com/lotacaosefazrn" target="_blank" rel="noopener">
-          <span class="num">Lotação</span>
+          <div class="card-top">
+            <span class="num">Lotação</span>
+            <span class="status" data-status-key="lotacao" data-state="unknown"><span class="dot"></span><span class="label">checando</span></span>
+          </div>
           <h3>Simulador de lotações</h3>
           <p>Explore cenários de lotação nas unidades da Sefaz/RN e visualize possibilidades de movimentação.</p>
           <span class="go">
@@ -441,6 +513,50 @@
 
     </div>
   </main>
+
+  <script>
+    (function(){
+      const STATE_LABEL = { up: 'no ar', down: 'fora do ar', unknown: 'sem dados', checking: 'checando' };
+
+      function timeAgo(iso){
+        if(!iso) return '';
+        const diffMin = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+        if(diffMin < 1) return 'agora mesmo';
+        if(diffMin < 60) return `há ${diffMin} min`;
+        const diffH = Math.round(diffMin / 60);
+        if(diffH < 24) return `há ${diffH} h`;
+        return `há ${Math.round(diffH / 24)} d`;
+      }
+
+      fetch('status.json?_=' + Date.now())
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+          const checks = data.checks || [];
+          let upCount = 0;
+
+          checks.forEach(c => {
+            const el = document.querySelector(`.status[data-status-key="${c.key}"]`);
+            if(!el) return;
+            el.dataset.state = c.status;
+            el.querySelector('.label').textContent = STATE_LABEL[c.status] || c.status;
+            if(c.status === 'up') upCount++;
+          });
+
+          const countEl = document.getElementById('live-count');
+          if(countEl){
+            countEl.textContent = `${upCount} de ${checks.length} no ar · atualizado ${timeAgo(data.generated_at)}`;
+          }
+        })
+        .catch(() => {
+          const countEl = document.getElementById('live-count');
+          if(countEl) countEl.textContent = 'status indisponível no momento';
+          document.querySelectorAll('.status').forEach(el => {
+            el.dataset.state = 'unknown';
+            el.querySelector('.label').textContent = 'sem dados';
+          });
+        });
+    })();
+  </script>
 
   <footer>
     <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; width:100%;">
