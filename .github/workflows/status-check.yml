@@ -1,0 +1,66 @@
+name: Verificar disponibilidade das ferramentas
+
+on:
+  schedule:
+    # a cada 15 minutos (o agendamento do GitHub é "best effort", pode atrasar em picos)
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: status-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checar cada ferramenta e gerar status.json
+        run: |
+          set -e
+
+          declare -A urls=(
+            [remuneracao]="https://tinyurl.com/remuneracaosefazrn"
+            [sei]="https://tinyurl.com/seisefazrn"
+            [lotacao]="https://tinyurl.com/lotacaosefazrn"
+          )
+
+          checks="[]"
+
+          for key in "${!urls[@]}"; do
+            url="${urls[$key]}"
+            code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 15 "$url" || echo "000")
+
+            if [ "$code" -ge 200 ] 2>/dev/null && [ "$code" -lt 400 ] 2>/dev/null; then
+              status="up"
+            else
+              status="down"
+            fi
+
+            checks=$(echo "$checks" | jq \
+              --arg key "$key" \
+              --arg url "$url" \
+              --arg status "$status" \
+              --arg code "$code" \
+              '. + [{"key":$key,"url":$url,"status":$status,"http_code":($code|tonumber)}]')
+          done
+
+          now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "{\"generated_at\": \"$now\", \"checks\": $checks}" | jq . > status.json
+
+      - name: Commitar status.json (se mudou)
+        run: |
+          git config user.name "status-bot"
+          git config user.email "actions@github.com"
+          git add status.json
+          if git diff --staged --quiet; then
+            echo "Sem mudanças de status."
+          else
+            git commit -m "chore: atualizar status.json"
+            git push
+          fi
