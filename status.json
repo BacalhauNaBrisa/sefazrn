@@ -1,8 +1,23 @@
 {
-  "generated_at": null,
+  "generated_at": "2026-08-15T01:27:58Z",
   "checks": [
-    { "key": "remuneracao", "url": "https://tinyurl.com/remuneracaosefazrn", "status": "unknown", "http_code": 0 },
-    { "key": "sei", "url": "https://tinyurl.com/seisefazrn", "status": "unknown", "http_code": 0 },
-    { "key": "lotacao", "url": "https://tinyurl.com/lotacaosefazrn", "status": "unknown", "http_code": 0 }
+    {
+      "key": "lotacao",
+      "url": "https://tinyurl.com/lotacaosefazrn",
+      "status": "up",
+      "http_code": 200
+    },
+    {
+      "key": "remuneracao",
+      "url": "https://tinyurl.com/remuneracaosefazrn",
+      "status": "up",
+      "http_code": 200
+    },
+    {
+      "key": "sei",
+      "url": "https://tinyurl.com/seisefazrn",
+      "status": "down",
+      "http_code": 301000
+    }
   ]
 }
