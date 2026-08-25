@@ -28,6 +28,7 @@ jobs:
             [remuneracao]="https://tinyurl.com/remuneracaosefazrn"
             [sei]="https://tinyurl.com/seisefazrn"
             [lotacao]="https://tinyurl.com/lotacaosefazrn"
+            [sumat]="https://tinyurl.com/sumatsefazrn"
           )
 
           checks="[]"
