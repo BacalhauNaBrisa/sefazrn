@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sefaz/RN · Auditores 2026</title>
-<meta name="description" content="Portal de acesso às ferramentas dos Auditores da Sefaz/RN: simulador de remuneração, controlo de processos no SEI e simulador de lotações.">
+<meta name="description" content="Portal de acesso às ferramentas dos Auditores da Sefaz/RN: simulador de remuneração, controlo de processos no SEI, simulador de lotações e escala de plantões da SUMAT.">
 <link rel="icon" href="afrelefante.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,7 +211,7 @@
 
   .cards{
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 22px;
   }
 
@@ -310,6 +310,8 @@
   .card.c1:hover .arrow{ background: #d9a63a; }
 
   .card.c3 .num{ color: #7f5aa8; }
+
+  .card.c4 .num{ color: #b1483f; }
 
   /* ---------- status indicator ---------- */
   .status{
@@ -439,7 +441,7 @@
         <div>
           <span class="eyebrow"><span class="dot"></span> Portal do Auditor · 2026</span>
           <h1 class="title">Sefaz/RN<br><em>Auditores</em></h1>
-          <p class="lede">Um ponto único de acesso às ferramentas construídas para os Auditores Fiscais da Sefaz/RN: remuneração, provimento e lotação, tudo reunido aqui.</p>
+          <p class="lede">Um ponto único de acesso às ferramentas construídas para os Auditores Fiscais da Sefaz/RN: remuneração, provimento, lotação e escala de plantões, tudo reunido aqui.</p>
         </div>
         <div class="hero-figure">
           <span class="badge-pin">cartão oficial</span>
@@ -447,7 +449,7 @@
         </div>
       </div>
       <div class="hero-meta">
-        <div>Ferramentas<strong>3 simuladores</strong></div>
+        <div>Ferramentas<strong>4 simuladores</strong></div>
         <div>Ciclo<strong>Exercício 2026</strong></div>
         <div>Acesso<strong>Aberto aos auditores</strong></div>
       </div>
@@ -500,6 +502,19 @@
           <p>Explore cenários de lotação nas unidades da Sefaz/RN e visualize possibilidades de movimentação.</p>
           <span class="go">
             <span class="url">tinyurl.com/lotacaosefazrn</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+
+        <a class="card c4" href="https://tinyurl.com/sumatsefazrn" target="_blank" rel="noopener">
+          <div class="card-top">
+            <span class="num">SUMAT · Plantões</span>
+            <span class="status" data-status-key="sumat" data-state="unknown"><span class="dot"></span><span class="label">a verificar</span></span>
+          </div>
+          <h3>Escala de plantões da SUMAT</h3>
+          <p>Consulte a escala de plantões de 12 horas dos novos auditores fiscais lotados na SUMAT, por auditor ou por dia.</p>
+          <span class="go">
+            <span class="url">tinyurl.com/sumatsefazrn</span>
             <span class="arrow" aria-hidden="true">↗</span>
           </span>
         </a>
