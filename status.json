@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T22:24:52Z",
+  "generated_at": "2026-08-27T03:28:58Z",
   "checks": [
     {
       "key": "lotacao",
@@ -22,8 +22,8 @@
     {
       "key": "sei",
       "url": "https://tinyurl.com/seisefazrn",
-      "status": "up",
-      "http_code": 200
+      "status": "down",
+      "http_code": 301000
     }
   ]
 }
