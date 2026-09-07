@@ -29,7 +29,7 @@ jobs:
             [sei]="https://tinyurl.com/seisefazrn"
             [lotacao]="https://tinyurl.com/lotacaosefazrn"
             [sumat]="https://tinyurl.com/sumatsefazrn"
-            [trm]="https://macbook-air-de-daniel.taildcde70.ts.net:8443/"
+            [trm]="https://tinyurl.com/trmsefazrn"
           )
 
           checks="[]"
