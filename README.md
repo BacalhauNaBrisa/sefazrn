@@ -14,6 +14,7 @@ Esta página não hospeda nenhuma ferramenta em si — ela apenas reúne, num ú
 | Controlo de processos no SEI | Acompanhamento de processos de provimento no Sistema Eletrónico de Informações | https://tinyurl.com/seisefazrn |
 | Simulador de lotações | Cenários de lotação e movimentação entre unidades da Sefaz/RN | https://tinyurl.com/lotacaosefazrn |
 | Escala de plantões da SUMAT | Consulta da escala de plantões de 12h dos novos auditores lotados na SUMAT | https://tinyurl.com/sumatsefazrn |
+| Gerador de TRM + Débitos | Consulta automatizada de TRMs na UVT da Sefaz/RN, com geração de PDF do Termo, Demonstrativo e GRIs | https://macbook-air-de-daniel.taildcde70.ts.net:8443/ |
 
 A página verifica automaticamente, a cada 15 minutos, se cada uma destas ferramentas está no ar — ver [Monitorização de disponibilidade](#monitorização-de-disponibilidade) abaixo.
 
@@ -28,7 +29,7 @@ A página verifica automaticamente, a cada 15 minutos, se cada uma destas ferram
 ├── README.md
 └── .github/
     └── workflows/
-        └── status-check.yml            # verifica as 4 ferramentas a cada 15 min
+        └── status-check.yml            # verifica as 5 ferramentas a cada 15 min
 ```
 
 ## Como publicar (GitHub Pages)
@@ -39,11 +40,11 @@ A página verifica automaticamente, a cada 15 minutos, se cada uma destas ferram
 
 ## Monitorização de disponibilidade
 
-O workflow `.github/workflows/status-check.yml` corre a cada 15 minutos (e também pode ser disparado manualmente em **Actions → Verificar disponibilidade das ferramentas → Run workflow**). Ele faz `curl` em cada um dos 4 links, segue redirecionamentos e grava o resultado em `status.json` na raiz do repositório.
+O workflow `.github/workflows/status-check.yml` corre a cada 15 minutos (e também pode ser disparado manualmente em **Actions → Verificar disponibilidade das ferramentas → Run workflow**). Ele faz `curl` em cada um dos 5 links, segue redirecionamentos e grava o resultado em `status.json` na raiz do repositório.
 
-O `index.html` lê esse `status.json` (mesma origem, sem CORS) e mostra, em cada cartão, um indicador verde ("no ar") ou vermelho ("fora do ar"), além do contador "X de 4 no ar" com a hora da última verificação.
+O `index.html` lê esse `status.json` (mesma origem, sem CORS) e mostra, em cada cartão, um indicador verde ("no ar") ou vermelho ("fora do ar"), além do contador "X de 5 no ar" com a hora da última verificação.
 
-> **Nota:** a ferramenta do SEI corre a partir de um portátil pessoal via Tailscale Funnel, por isso a sua disponibilidade depende de esse portátil estar ligado e com ligação à rede.
+> **Nota:** as ferramentas do SEI e do Gerador de TRM + Débitos correm a partir do mesmo portátil pessoal, expostas via Tailscale Funnel (portas 443 e 8443, respetivamente), por isso a sua disponibilidade depende de esse portátil estar ligado e com ligação à rede.
 
 ## Atualizando os links
 

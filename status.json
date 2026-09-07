@@ -24,6 +24,12 @@
       "url": "https://tinyurl.com/seisefazrn",
       "status": "down",
       "http_code": 301000
+    },
+    {
+      "key": "trm",
+      "url": "https://macbook-air-de-daniel.taildcde70.ts.net:8443/",
+      "status": "unknown",
+      "http_code": 0
     }
   ]
 }
