@@ -14,7 +14,7 @@ Esta página não hospeda nenhuma ferramenta em si — ela apenas reúne, num ú
 | Controlo de processos no SEI | Acompanhamento de processos de provimento no Sistema Eletrónico de Informações | https://tinyurl.com/seisefazrn |
 | Simulador de lotações | Cenários de lotação e movimentação entre unidades da Sefaz/RN | https://tinyurl.com/lotacaosefazrn |
 | Escala de plantões da SUMAT | Consulta da escala de plantões de 12h dos novos auditores lotados na SUMAT | https://tinyurl.com/sumatsefazrn |
-| Gerador de TRM + Débitos | Consulta automatizada de TRMs na UVT da Sefaz/RN, com geração de PDF do Termo, Demonstrativo e GRIs | https://macbook-air-de-daniel.taildcde70.ts.net:8443/ |
+| Gerador de TRM + Débitos | Consulta automatizada de TRMs na UVT da Sefaz/RN, com geração de PDF do Termo, Demonstrativo e GRIs | https://tinyurl.com/trmsefazrn |
 
 A página verifica automaticamente, a cada 15 minutos, se cada uma destas ferramentas está no ar — ver [Monitorização de disponibilidade](#monitorização-de-disponibilidade) abaixo.
 
