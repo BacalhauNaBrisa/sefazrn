@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T00:42:12Z",
+  "generated_at": "2026-09-08T05:19:51Z",
   "checks": [
     {
       "key": "lotacao",
@@ -10,8 +10,8 @@
     {
       "key": "trm",
       "url": "https://tinyurl.com/trmsefazrn",
-      "status": "up",
-      "http_code": 200
+      "status": "down",
+      "http_code": 301000
     },
     {
       "key": "remuneracao",
