@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T04:26:32Z",
+  "generated_at": "2026-09-10T09:05:42Z",
   "checks": [
     {
       "key": "lotacao",
@@ -16,14 +16,14 @@
     {
       "key": "remuneracao",
       "url": "https://tinyurl.com/remuneracaosefazrn",
-      "status": "down",
-      "http_code": 0
+      "status": "up",
+      "http_code": 200
     },
     {
       "key": "sumat",
       "url": "https://tinyurl.com/sumatsefazrn",
-      "status": "down",
-      "http_code": 0
+      "status": "up",
+      "http_code": 200
     },
     {
       "key": "sei",
