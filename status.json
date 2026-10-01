@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T21:22:52Z",
+  "generated_at": "2026-10-01T00:46:05Z",
   "checks": [
     {
       "key": "lotacao",
@@ -22,8 +22,8 @@
     {
       "key": "sumat",
       "url": "https://tinyurl.com/sumatsefazrn",
-      "status": "up",
-      "http_code": 200
+      "status": "down",
+      "http_code": 404
     }
   ]
 }
