@@ -24,6 +24,12 @@
       "url": "https://tinyurl.com/sumatsefazrn",
       "status": "down",
       "http_code": 404
+    },
+    {
+      "key": "pauta",
+      "url": "https://tinyurl.com/pautasefazrn",
+      "status": "unknown",
+      "http_code": 0
     }
   ]
 }
