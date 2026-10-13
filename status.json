@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T08:30:14Z",
+  "generated_at": "2026-10-13T11:06:24Z",
   "checks": [
     {
       "key": "lotacao",
@@ -28,8 +28,8 @@
     {
       "key": "pauta",
       "url": "https://tinyurl.com/pautasefazrn",
-      "status": "unknown",
-      "http_code": 0
+      "status": "up",
+      "http_code": 200
     }
   ]
 }
